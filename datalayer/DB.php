@@ -1,5 +1,5 @@
 <?php
-require_once 'D:/xamp/htdocs/prova/config.php';
+require_once __DIR__.'/../config.php';
 class DB{
 	private static $instance;
 	public static function getInstance()

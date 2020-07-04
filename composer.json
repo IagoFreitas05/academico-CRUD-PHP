@@ -1,0 +1,19 @@
+{
+    "name": "vendor/app",
+    "authors": [
+        {
+            "name": "iagofreitas05",
+            "email": "iagofreitas05@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Source\\": "source/"
+        }
+    },
+    "require": {
+        "dompdf/dompdf": "0.8.*",
+        "mpdf/mpdf": "8.0.6"
+    }
+
+}

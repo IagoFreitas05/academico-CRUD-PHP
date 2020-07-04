@@ -1,5 +1,5 @@
 <?php
-require_once 'D:/xamp/htdocs/prova/datalayer/Crud.php';
+include __DIR__.'/../datalayer/Crud.php';
 
 class usuarios extends Crud
 {

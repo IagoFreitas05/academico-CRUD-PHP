@@ -1,37 +1,3 @@
-<?php include "models/usuarios.php";
-$myuser = new usuarios();
-if(isset($_POST['f_mail']) and isset($_POST['f_senha'])){
-	$myuser->setEmail($_POST['f_mail']);
-	$myuser->setSenha(md5($_POST['f_senha']));
-	$resultado = $myuser->login();
-	if($resultado > 0){
-		if($myuser->getSenha() == 'e10adc3949ba59abbe56e057f20f883e')
-		{
-			$resultado = $myuser->busca($_POST['f_mail'], md5($_POST['f_senha']));
-			foreach($resultado as $key=>$value):
-				$id = $value->id;
-			endforeach;
-			session_start();
-			$_SESSION["id"] = $id;
-			Header("Location:actions/novaSenha.php");
-		}
-		else
-		{
-			Header("Location:actions/cadastro.php");
-		}
-	}
-	else
-	{
-		exibe_pagina('<div class="alert alert-warning">Login ou senha incorreto</div> ');
-	}
-}
-else
-{
-	exibe_pagina('');
-}
-
-function exibe_pagina($mensagem){
-	?>
 
 	<!DOCTYPE html>
 	<html lang="en">
@@ -47,9 +13,15 @@ function exibe_pagina($mensagem){
 			<div class="row " style="height:100%;">
 				<div class="col-md-6" style="background: url('assets/image/fundo.png');background-position:center	">
 				</div>
-				<div class="col-md-6 p-5 bg-info" style="height:100vh;">
-					<?= $mensagem ?>
-					<form class='form-signin align-middle mt-5 shadow-lg p-5 bg-white' method=POST action="#">
+				<div class="col-md-6 p-5 rounded bg-info" style="height:100vh;">
+					<?php
+                    if(isset($_GET['mensagem']))
+                    {
+                        echo 'Falha na autenticação';
+                    }
+                    ?>
+
+					<form class='form-signin align-middle mt-5 shadow-lg p-5 rounded bg-white' method=POST action="app/autentica.php">
 						<div class="form-group">
 							<label for="txtUsuario">usuário</label>
 							<input type="text" placeholder="digite seu email" name="f_mail" id="f_mail" class="form-control form-custom"  required="" />
@@ -70,6 +42,4 @@ function exibe_pagina($mensagem){
 	</div>
 </body>
 </html>
-<?php
-}
-?>
+
